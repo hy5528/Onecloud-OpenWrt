@@ -21,7 +21,7 @@ env:
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: config/lede.config
-  DIY_P1_SH: sh/diy-part5.sh
+  DIY_P1_SH: sh/diy-part3.sh
   DIY_P2_SH: sh/diy-part4.sh
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
