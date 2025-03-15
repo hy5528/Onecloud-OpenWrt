@@ -1,4 +1,4 @@
-name: openwrt
+name: openwrt2
 
 on:
   repository_dispatch:
