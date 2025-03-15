@@ -25,7 +25,7 @@ on:
       OP_author:
         description: '定制作者'     
         required: false
-        default: 'Benefit66' 
+        default: 'onecloud' 
         type: string    
 
       CUSTOM_PLUGINS:
