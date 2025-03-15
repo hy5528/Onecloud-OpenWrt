@@ -35,7 +35,7 @@ on:
         type: string
 
 env:
-  DIY_P1_SH: diy-part3.sh
+  DIY_P1_SH: sh/diy-part3.sh
   DIY_P2_SH: sh/diy-part4.sh
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
