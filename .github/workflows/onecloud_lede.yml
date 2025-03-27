@@ -8,17 +8,17 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: oncloud
+name: onecloud_lede
 
 on:
   repository_dispatch:
   workflow_dispatch:
 
 env:
-  REPO_URL: https://github.com/openwrt/openwrt
-  REPO_BRANCH: openwrt-24.10
+  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: seed.config
+  CONFIG_FILE: seed-lite.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: false
@@ -27,7 +27,7 @@ env:
   UPLOAD_WETRANSFER: false
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
-  OPENWRT_TAG: openwrt_meson8b
+  OPENWRT_TAG: lite_meson8b
 
 jobs:
   build:
@@ -162,8 +162,9 @@ jobs:
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $DIY_P2_SH
         cd openwrt
-        $GITHUB_WORKSPACE/$DIY_P2_SH
+        $GITHUB_WORKSPACE/$DIY_P2_
 
+    
     - name: Get architecture
       working-directory: ${{ github.workspace }}/openwrt
       run: |
@@ -302,26 +303,12 @@ jobs:
         body: |
           This is OpenWrt firmware for OneCloud
           ### 📒 Firmware information
-          - 🚀 amlogic_meson8b 多功能版，集成插件多
-          - 💋一键扩容 cd /root ./expand-root.sh
-          - 💻 平台架构: ${{ env.DEVICE_TARGET }}-${{ env.DEVICE_SUBTARGET }}
-          - ⚽ 固件源码: ${{ env.REPO_URL }}
+          - 🚀 amlogic_meson8b 多功能版
+          - 💋扩容： 重启系统
+          - 💻 平台架构: ARMV7
+          - ⚽ 固件源码: https://github.com/coolsnowwolf/lede
           - 💝 源码分支: ${{ env.REPO_BRANCH }}
-          - 🌐 Default IP: 192.168.2.3
+          - 🌐 Default IP: 192.168.2.158
           - 🔑 Default username: root
           - 🔑 Default password: password
         
-    - name: Delete workflow runs
-      uses: Mattraks/delete-workflow-runs@main
-      with:
-        retain_days: 1
-        keep_minimum_runs: 3
-
-    - name: Remove old Releases
-      uses: dev-drprasad/delete-older-releases@master
-      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
-      with:
-        keep_latest: 3
-        delete_tags: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
