@@ -27,7 +27,7 @@ env:
   UPLOAD_WETRANSFER: false
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
-  OPENWRT_TAG: lite_meson8b
+  OPENWRT_TAG: openwrt_meson8b
 
 jobs:
   build:
