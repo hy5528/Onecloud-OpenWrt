@@ -164,6 +164,11 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
 
+    - name: Convert Translation
+      working-directory: ./openwrt
+      run: |
+        cp ../sh/02_convert_translation.sh .
+        /bin/bash 02_convert_translation.sh
     
     - name: Get architecture
       working-directory: ${{ github.workspace }}/openwrt
