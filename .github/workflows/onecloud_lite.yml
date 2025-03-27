@@ -156,6 +156,12 @@ jobs:
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
 
+    - name: Convert Translation
+      working-directory: ./openwrt
+      run: |
+        cp ../sh/02_convert_translation.sh .
+        /bin/bash 02_convert_translation.sh
+
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
@@ -164,12 +170,7 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_
 
-    - name: Convert Translation
-      working-directory: ./openwrt
-      run: |
-        cp ../sh/02_convert_translation.sh .
-        /bin/bash 02_convert_translation.sh
-
+    
     - name: Get architecture
       working-directory: ${{ github.workspace }}/openwrt
       run: |
