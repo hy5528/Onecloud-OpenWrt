@@ -58,7 +58,7 @@ merge_package main https://github.com/xiaorouji/openwrt-passwall package/app luc
 merge_package dev https://github.com/vernesong/OpenClash package/app luci-app-openclash
 
 # 内核，参照 kiddin9
-
+rm -rf target/linux/amlogic
 shopt -s extglob
 SHELL_FOLDER=$(dirname $(readlink -f "$0"))
 merge_package main https://github.com/lxiaya/openwrt-onecloud target/linux target/linux/amlogic
