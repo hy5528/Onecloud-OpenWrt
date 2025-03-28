@@ -13,6 +13,14 @@ do
 	mv "$a" "${po_new_file}" 2>"/dev/null"
 done
 
+po_file2="$({ find |grep "/zh-cn/" |grep "\.po"; } 2>"/dev/null")"
+for b in ${po_file2}
+do
+	[ -n "$(grep "Language: zh_CN" "$b")" ] && sed -i "s/Language: zh_CN/Language: zh_Hans/g" "$b"
+	po_new_file2="$(echo -e "$b"|sed "s/zh-cn/zh_Hans/g")"
+	mv "$b" "${po_new_file2}" 2>"/dev/null"
+done
+
 lmo_file="$({ find |grep -E "[a-z0-9]+\.zh_Hans.+lmo"; } 2>"/dev/null")"
 for c in ${lmo_file}
 do
